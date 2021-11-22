@@ -178,6 +178,10 @@ small{
     margin-top: 10% !important;
 }
 
+.divSelect select{
+    height: 40px;
+    font-size: 14px;
+}
 /************Hide Scroll Bar*************/
 ::-webkit-scrollbar{
     width: 0;
