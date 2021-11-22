@@ -1,0 +1,204 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
+}
+
+/****Font Size Weight start********/
+h1{
+    font-size: 40px;
+    font-weight: bold;
+}
+h2{
+    font-size: 35px;
+    font-weight: bold;
+}
+h3{
+    font-size: 30px;
+    font-weight: bold;
+}
+h4{
+    font-size: 25px;
+    font-weight: bold;
+}
+h5{
+    font-size: 20px;
+    font-weight: bold;
+}
+h6{
+    font-size: 15px;
+    font-weight: bold;
+}
+small{
+    font-size: 12px;
+    font-weight: bold;
+}
+.xsmall{
+    font-size: 10px;
+}
+
+/****Font Size Weight End********/
+
+
+/****Color Start********/
+.cl-mat{
+    color: #4C4D4F;
+}
+.cl-grey{
+    color: #98A0A5;
+}
+.cl-blue{
+    color: #4461D7;
+}
+.cl-white{
+    color: #ffff;
+}
+.cl-red{
+    color:#FC4967;
+}
+.cl-yellow{
+    color:#FFB951;
+}
+.cl-green{
+    color:#19BF87;
+}
+.bg-cl-red{
+    background-color:#FC4967;
+}
+.bg-cl-green{
+    background-color:#19BF87;
+}
+.bg-cl-blue{
+    background-color: #4461D7;
+}
+.bg-cl-grey{
+    background-color: #F7F8FD;
+}
+.bg-cl-pm{
+    background-color: #f8f8f8;
+}
+.bg-cl-dark{
+    background-color: #000;
+}
+.bg-cl-light-blue{
+    background-color: rgba(44, 64, 143, 0.2);
+}
+
+.bg-cl-light-red{
+    background-color: rgba(252, 73, 103, 0.2);
+}
+
+.bg-cl-light-yellow{
+    background-color: rgba(255, 185, 81, 0.2);
+}
+
+.bg-cl-light-green{
+    background-color: rgba(25, 191, 135, 0.2);
+}
+
+
+/*******Border**********/
+.divborder{
+    border: 0.5px solid #4461D7;
+    border-radius: 10px;
+}
+
+.divborder1{
+    border: 0.5px solid #D1D1D1;
+}
+.divborder2{
+    border: 0.5px solid #FC4967;
+}
+.divborder3{
+    border: 0.5px solid #FFB951;
+}
+.divborder4{
+    border: 0.5px solid #19BF87;
+}
+
+
+/********Cursor************/
+.cursor{
+    cursor: pointer;
+}
+
+
+/*******PlaceHolder start**********/
+
+::-webkit-input-placeholder{
+    color: #98A0A5;
+    font-size: small;
+  }
+
+/*******PlaceHolder End**********/
+
+/*******Input Start**********/
+  input:focus{
+      outline: none;
+  }
+/*******Input End**********/
+
+/*******Middle Section Start**********/
+  .backlog span, .pending span, .inprogress span, .completed span{
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      font-size: 13px;
+  }
+/*******Middle Section End**********/
+
+
+/************Dropdown Start*************/
+.dropdown-toggle::after{
+    color: white;
+}
+
+/************Dropdown End*************/
+
+/************Tooltip start*************/
+.divContentTooltip{
+    height: 24px;
+    width: 24px;
+}
+/************Tooltip End*************/
+
+/************Main*******************/
+.main{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.divBody{
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.divBodyHeadDropDown{
+    margin-top: 10% !important;
+}
+
+/************Hide Scroll Bar*************/
+::-webkit-scrollbar{
+    width: 0;
+  }
+
+
+
+  /********************Media Query**************/
+
+  @media(min-width:1050px) and (max-width:1710px){
+    .divBodyBottom{
+        flex-direction: column;
+        align-items: center;
+    }
+  }
+
+  @media(min-width:1050px) and (max-width:1560px){
+      .divHeader{
+          flex-direction: column;
+      }
+      .divBodyHeadDropDown{
+          margin-top: 90% !important;
+      }
+  }
