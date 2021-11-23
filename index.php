@@ -4,6 +4,9 @@ include_once("include/config.php");
 
 $state=0;
 
+$activeId = "";
+$activeTask = "";
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
@@ -97,6 +100,22 @@ $state=0;
                           
     }
 
+    function get_active_value($type, $content)
+    {
+        $currentType = isset($_GET['type']) ? $_GET['type'] : null;
+        if ($currentType == $type) {
+            return $content;
+        }
+        return "";
+    }
+
+    function editTask(){
+        $baseUrl = $_SERVER["PHP_SELF"] . "?shift&id=" . $taskObject["id"] . "&type=";
+    $editUrl = $_SERVER["PHP_SELF"] . "?edit&id=" . $taskObject["id"] . "&type=" . $type;
+
+    $deleteUrl = $_SERVER["PHP_SELF"] . "?delete&id=" . $taskObject["id"];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +161,7 @@ $state=0;
                     </div>
                 </div>
                 <div>
-                    <h3>Work Queue</h3>
+                    <h3>Work Queue System</h3>
                 </div>
                 <div>
                     <form action="search.php" method="post">
@@ -203,7 +222,7 @@ $state=0;
                                     <div class="d-flex mb-2">
                                         <div class="divHeaderInput">
                                             <input class="border-0 p-2 rounded-3 bg-cl-grey w-100" type="text"
-                                                placeholder="Type Task Name Here" name="task">
+                                                placeholder="Type Task Name Here" name="task" value="<?php echo get_active_value("backlog", $activeTask); ?>">
                                         </div>
                                         <div class="dropdown bg-cl-dark fw-light rounded-3 mx-2">
                                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"

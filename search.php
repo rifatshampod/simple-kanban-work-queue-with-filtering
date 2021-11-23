@@ -141,17 +141,17 @@ $incharge="";
     <section class="main bg-cl-pm px-5 pt-4">
         <div class="container-fluid">
             <div class="header d-flex justify-content-between align-items-center mb-5">
-            <a href="index.php">
-                <div class="d-flex align-items-center">
+            
+                <div class="d-flex align-items-center" onclick="location.href='index.php'">
                     
                     <div class="me-3">
                         <img src="assets/image/logo.png" alt="">
                     </div>
                     <div>
-                        <h5 class="cl-mat">Livetech</h5>
+                        <h5 class="cl-mat cursor">Livetech</h5>
                     </div>
                     
-                </div> </a>
+                </div> 
                 <div>
                     <h3>Work Queue</h3>
                 </div>
