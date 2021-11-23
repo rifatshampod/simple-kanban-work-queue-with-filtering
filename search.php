@@ -1,12 +1,21 @@
 <?php
 
 include_once("include/config.php");
-
 $state=0;
+
+$incharge="";
+
+// $_GET['subject'] . " at " . $_GET['web'];
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    
+        if(isset($_POST['searchbtn'])){
+            $incharge=$_POST['incharge'];
+
+        }
+        
+
         if(isset($_POST['btn1'])){
             stateChange($_POST['btn1'], 1);
         }
@@ -75,10 +84,10 @@ $state=0;
         }
     }
 
-    function findTotal($status){   //--------------------------------find total number
+    function findTotal($status, $incharge){   //--------------------------------find total number
         include("include/config.php");
 
-        $sql="SELECT * FROM livetech where position='$status' AND status='1'";
+        $sql="SELECT * FROM livetech where position='$status' AND status='1' AND person='$incharge'";
 
                         if ($result=mysqli_query($conn,$sql))
                           {
@@ -132,19 +141,22 @@ $state=0;
     <section class="main bg-cl-pm px-5 pt-4">
         <div class="container-fluid">
             <div class="header d-flex justify-content-between align-items-center mb-5">
+            <a href="index.php">
                 <div class="d-flex align-items-center">
+                    
                     <div class="me-3">
                         <img src="assets/image/logo.png" alt="">
                     </div>
                     <div>
                         <h5 class="cl-mat">Livetech</h5>
                     </div>
-                </div>
+                    
+                </div> </a>
                 <div>
                     <h3>Work Queue</h3>
                 </div>
                 <div>
-                    <form action="">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                         <div>
                             <!-- <small class="mb-5">Search a Responsible person</small> -->
                             <div class="d-flex align-items-center">
@@ -164,17 +176,28 @@ $state=0;
                                 <div class="me-2">
                                     <div class="selector divSelect">
                                         <select class="form-select form-select-lg color-grey"
-                                            aria-label=".form-select-lg example">
-                                            <option selected> All</option>
-                                            <option value="1">Rifat Bin Monsur Shampod</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            aria-label=".form-select-lg example" name="incharge">
+                                            
+                                            <option value="Rifat Shampod">Rifat Shampod</option>
+                                            <option value="Samiul Islam Midon">Samiul Islam Midon</option>
+                                            <option value="Antu Shamitra">Antu Shamitra</option>
+                                            <option value="Privel Paul Titu">Privel Paul Titu</option>
+                                            <option value="Rafsan Hossain">Rafsan Hossain</option>
+                                            <option value="Tonmoy Mandal">Tonmoy Mandal</option>
+                                            <option value="Tonu Tahmid">Tonu Tahmid</option>
+                                            <option value="Sheikh Mehedi">Sheikh Mehedi</option>
+                                            <option value="Manowar Haider">Manowar Haider</option>
+                                            <option value="Arif Bipu">Arif Bipu</option>
+                                            <option value="Ahona Yesmin">Ahona Yesmin</option>
+                                            <option value="Iftekhar sakib">Iftekhar sakib</option>
+                                            <option value="Gulsaba Fiha">Gulsaba Fiha</option>
+                                            <option value="Shawon Islam">Shawon Islam</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="bg-cl-dark border-0 rounded-3 p-2 cl-white fw-light" type="submit"><i
-                                            class="fas fa-search"></i> Search</button>
+                                    <button class="bg-cl-dark border-0 rounded-3 p-2 cl-white fw-light" type="submit" name="searchbtn"><i
+                                            class="fas fa-search" ></i> Search</button>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +206,7 @@ $state=0;
             </div>
             <div class="row">
                 <div class="col-lg-3 backlog">
-                    <h6 class="mb-3">Backlog <span class="bg-cl-light-blue cl-blue px-2 py-1 ms-2"><?php echo findTotal(1);?></span></h6>  
+                    <h6 class="mb-3">Backlog <span class="bg-cl-light-blue cl-blue px-2 py-1 ms-2"><?php echo findTotal(1, $incharge);?></span></h6>  
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
                             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -226,7 +249,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='1' AND status='1' ORDER BY id desc";
+                                        $sql = "SELECT * FROM livetech where position='1' AND status='1' AND person='$incharge' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -285,13 +308,21 @@ $state=0;
                             <?php
                                             }
                                         }
+
+                                        else{
+                                            ?>
+                                        <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
+                                            <h4>No Data Found</h4>
+                                        </div>
+                                        <?php 
+                                        }
                                     ?>
                             
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 pending">
-                    <h6 class="mb-3">Pending <span class="bg-cl-light-red cl-blue px-2 py-1 ms-2"><?php echo findTotal(2); ?></span></h6>
+                    <h6 class="mb-3">Pending <span class="bg-cl-light-red cl-blue px-2 py-1 ms-2"><?php echo findTotal(2, $incharge); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -334,7 +365,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='2' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='2' AND status='1' AND person='$incharge' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -389,13 +420,20 @@ $state=0;
                             <?php
                                                 }
                                             }
+                                            else{
+                                                ?>
+                                            <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
+                                                <h4>No Data Found</h4>
+                                            </div>
+                                            <?php 
+                                            }
                             ?>
                         </div>
                     </div>
                 </div>
                 <!-------------------------in progress --------------------------->
                 <div class="col-lg-3 inprogress">
-                    <h6 class="mb-3">In Progress <span class="bg-cl-light-yellow cl-blue px-2 py-1 ms-2"><?php echo findTotal(3); ?></span></h6>
+                    <h6 class="mb-3">In Progress <span class="bg-cl-light-yellow cl-blue px-2 py-1 ms-2"><?php echo findTotal(3, $incharge); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -438,7 +476,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='3' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='3' AND status='1' AND person='$incharge' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -496,6 +534,14 @@ $state=0;
                             <?php
                                     }
                                 }
+
+                                else{
+                                    ?>
+                                <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
+                                    <h4>No Data Found</h4>
+                                </div>
+                                <?php 
+                                }
                             ?>
                         </div>
                     </div>
@@ -503,7 +549,7 @@ $state=0;
                 <!-------------------------in progress --------------------------->
 
                 <div class="col-lg-3 completed">
-                    <h6 class="mb-3">completed <span class="bg-cl-light-green cl-blue px-2 py-1 ms-2"><?php echo findTotal(4); ?></span></h6>
+                    <h6 class="mb-3">completed <span class="bg-cl-light-green cl-blue px-2 py-1 ms-2"><?php echo findTotal(4, $incharge); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -546,7 +592,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='4' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='4' AND person='$incharge' AND status='1' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -601,6 +647,14 @@ $state=0;
                             </div>
                             <?php
                                         }
+                                    }
+
+                                    else{
+                                        ?>
+                                    <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
+                                        <h4>No Data Found</h4>
+                                    </div>
+                                    <?php 
                                     }
                             ?>
                         </div>

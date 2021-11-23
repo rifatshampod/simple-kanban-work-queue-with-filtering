@@ -96,6 +96,7 @@ $state=0;
         $result=mysqli_query($conn,$sqlUpdate);
                           
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +145,7 @@ $state=0;
                     <h3>Work Queue</h3>
                 </div>
                 <div>
-                    <form action="">
+                    <form action="search.php" method="post">
                         <div>
                             <!-- <small class="mb-5">Search a Responsible person</small> -->
                             <div class="d-flex align-items-center">
@@ -164,17 +165,28 @@ $state=0;
                                 <div class="me-2">
                                     <div class="selector divSelect">
                                         <select class="form-select form-select-lg color-grey"
-                                            aria-label=".form-select-lg example">
-                                            <option selected> All</option>
-                                            <option value="1">Rifat Bin Monsur Shampod</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            aria-label=".form-select-lg example" name="incharge">
+                                            <option value="0" selected> All</option>
+                                            <option value="Rifat Shampod">Rifat Shampod</option>
+                                            <option value="Samiul Islam Midon">Samiul Islam Midon</option>
+                                            <option value="Antu Shamitra">Antu Shamitra</option>
+                                            <option value="Privel Paul Titu">Privel Paul Titu</option>
+                                            <option value="Rafsan Hossain">Rafsan Hossain</option>
+                                            <option value="Tonmoy Mandal">Tonmoy Mandal</option>
+                                            <option value="Tonu Tahmid">Tonu Tahmid</option>
+                                            <option value="Sheikh Mehedi">Sheikh Mehedi</option>
+                                            <option value="Manowar Haider">Manowar Haider</option>
+                                            <option value="Arif Bipu">Arif Bipu</option>
+                                            <option value="Ahona Yesmin">Ahona Yesmin</option>
+                                            <option value="Iftekhar sakib">Iftekhar sakib</option>
+                                            <option value="Gulsaba Fiha">Gulsaba Fiha</option>
+                                            <option value="Shawon Islam">Shawon Islam</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="bg-cl-dark border-0 rounded-3 p-2 cl-white fw-light" type="submit"><i
-                                            class="fas fa-search"></i> Search</button>
+                                    <button class="bg-cl-dark border-0 rounded-3 p-2 cl-white fw-light" type="submit" name="searchbtn"><i
+                                            class="fas fa-search" ></i> Search</button>
                                 </div>
                             </div>
                         </div>
@@ -204,13 +216,20 @@ $state=0;
                                                         id="browser" placeholder="type name here">
                                                     <datalist id="browsers">
                                                         <input class="bg-cl-grey w-100" type="text">
-                                                        <option value="Bipu">
-                                                        <option value="Shampod">
+                                                        <option value="Rifat Shampod">
+                                                        <option value="Samiul Islam Midon">
+                                                        <option value="Antu Shamitra">
                                                         <option value="Privel Paul Titu">
-                                                        <option value="Mehedi">
-                                                        <option value="Manowar">
-                                                        <option value="Ahona">
-                                                        <option value="sakib">
+                                                        <option value="Rafsan Hossain">
+                                                        <option value="Tonmoy Mandal">
+                                                        <option value="Tonu Tahmid">
+                                                        <option value="Sheikh Mehedi">
+                                                        <option value="Manowar Haider">
+                                                        <option value="Arif Bipu">
+                                                        <option value="Ahona Yesmin">
+                                                        <option value="Iftekhar sakib">
+                                                        <option value="Gulsaba Fiha">
+                                                        <option value="Shawon Islam">
                                                     </datalist>
                                                 </div>
                                             </ul>
@@ -225,7 +244,7 @@ $state=0;
                         </div>
                         <hr class="cl-blue">
                         <div class="divBody">
-                        <?php 
+                            <?php 
                                         $sql = "SELECT * FROM livetech where position='1' AND status='1' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
@@ -312,13 +331,20 @@ $state=0;
                                                         id="browser" placeholder="type name here">
                                                     <datalist id="browsers">
                                                         <input class="bg-cl-grey w-100" type="text">
-                                                        <option value="Bipu">
-                                                        <option value="Shampod">
+                                                        <option value="Rifat Shampod">
+                                                        <option value="Antu Shamitra">
                                                         <option value="Privel Paul Titu">
-                                                        <option value="Mehedi">
-                                                        <option value="Manowar">
-                                                        <option value="Ahona">
-                                                        <option value="sakib">
+                                                        <option value="Samiul Islam Midon">
+                                                        <option value="Rafsan Hossain">
+                                                        <option value="Tonmoy Mandal">
+                                                        <option value="Tonu Tahmid">
+                                                        <option value="Sheikh Mehedi">
+                                                        <option value="Manowar Haider">
+                                                        <option value="Arif Bipu">
+                                                        <option value="Ahona Yesmin">
+                                                        <option value="Iftekhar sakib">
+                                                        <option value="Gulsaba Fiha">
+                                                        <option value="Shawon Islam">
                                                     </datalist>
                                                 </div>
                                             </ul>
@@ -334,7 +360,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='2' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='2' AND status='1' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -416,13 +442,20 @@ $state=0;
                                                         id="browser" placeholder="type name here">
                                                     <datalist id="browsers">
                                                         <input class="bg-cl-grey w-100" type="text">
-                                                        <option value="Bipu">
-                                                        <option value="Shampod">
+                                                        <option value="Rifat Shampod">
+                                                        <option value="Antu Shamitra">
                                                         <option value="Privel Paul Titu">
-                                                        <option value="Mehedi">
-                                                        <option value="Manowar">
-                                                        <option value="Ahona">
-                                                        <option value="sakib">
+                                                        <option value="Samiul Islam Midon">
+                                                        <option value="Rafsan Hossain">
+                                                        <option value="Tonmoy Mandal">
+                                                        <option value="Tonu Tahmid">
+                                                        <option value="Sheikh Mehedi">
+                                                        <option value="Manowar Haider">
+                                                        <option value="Arif Bipu">
+                                                        <option value="Ahona Yesmin">
+                                                        <option value="Iftekhar sakib">
+                                                        <option value="Gulsaba Fiha">
+                                                        <option value="Shawon Islam">
                                                     </datalist>
                                                 </div>
                                             </ul>
@@ -438,7 +471,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='3' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='3' AND status='1' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
@@ -524,13 +557,21 @@ $state=0;
                                                         id="browser" placeholder="type name here">
                                                     <datalist id="browsers">
                                                         <input class="bg-cl-grey w-100" type="text">
-                                                        <option value="Bipu">
-                                                        <option value="Shampod">
+                                                        
+                                                        <option value="Rifat Shampod">
+                                                        <option value="Antu Shamitra">
                                                         <option value="Privel Paul Titu">
-                                                        <option value="Mehedi">
-                                                        <option value="Manowar">
-                                                        <option value="Ahona">
-                                                        <option value="sakib">
+                                                        <option value="Samiul Islam Midon">
+                                                        <option value="Rafsan Hossain">
+                                                        <option value="Tonmoy Mandal">
+                                                        <option value="Tonu Tahmid">
+                                                        <option value="Sheikh Mehedi">
+                                                        <option value="Manowar Haider">
+                                                        <option value="Arif Bipu">
+                                                        <option value="Ahona Yesmin">
+                                                        <option value="Iftekhar sakib">
+                                                        <option value="Gulsaba Fiha">
+                                                        <option value="Shawon Islam">
                                                     </datalist>
                                                 </div>
                                             </ul>
@@ -546,7 +587,7 @@ $state=0;
                         <hr class="cl-blue">
                         <div class="divBody">
                         <?php 
-                                        $sql = "SELECT * FROM livetech where position='4' AND status='1'";
+                                        $sql = "SELECT * FROM livetech where position='4' AND status='1' ORDER BY id desc";
                                         $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
