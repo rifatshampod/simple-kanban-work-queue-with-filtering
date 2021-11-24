@@ -274,8 +274,8 @@ if ($result->num_rows > 0) {
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit" ><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
                                                     class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
@@ -388,9 +388,9 @@ if ($result->num_rows > 0) {
                                                         <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                     </div>
                                                     <div
-                                                        class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                        <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
-                                                    </div>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                </div>
                                                     <div
                                                         class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
                                                         <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
@@ -499,8 +499,8 @@ if ($result->num_rows > 0) {
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
                                                     class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
@@ -672,7 +672,7 @@ if ($result->num_rows > 0) {
                                     <input type="text" id="task" name="task" placeholder="Task Name">
                                     <select
                                             aria-label=".form-select-lg example" name="incharge">
-                                            <option value="0" selected> All</option>
+                                            <option value="0" selected> Select Incharge</option>
                                             <option value="Rifat Shampod">Rifat Shampod</option>
                                             <option value="Samiul Islam Midon">Samiul Islam Midon</option>
                                             <option value="Antu Shamitra">Antu Shamitra</option>

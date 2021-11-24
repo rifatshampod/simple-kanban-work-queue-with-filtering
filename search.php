@@ -289,12 +289,12 @@ $incharge="";
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1"  data-bs-toggle="modal" data-bs-target="#popUp">
-                                                    <i class="fas fa-trash-alt xsmall"></i>
+                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
+                                                    <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
                                             
                                                 
@@ -404,13 +404,13 @@ $incharge="";
                                                         <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                     </div>
                                                     <div
-                                                        class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                        <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
-                                                    </div>
-                                                    <div
-                                                        class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1"  data-bs-toggle="modal" data-bs-target="#popUp">
-                                                        <i class="fas fa-trash-alt xsmall"></i>
-                                                    </div>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                </div>
+                                                <div
+                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
+                                                    <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
+                                                </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -515,12 +515,12 @@ $incharge="";
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1"  data-bs-toggle="modal" data-bs-target="#popUp">
-                                                    <i class="fas fa-trash-alt xsmall"></i>
+                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
+                                                    <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
                                             
                                                 
@@ -631,12 +631,12 @@ $incharge="";
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white" type="submit" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1"  data-bs-toggle="modal" data-bs-target="#popUp">
-                                                    <i class="fas fa-trash-alt xsmall"></i>
+                                                    class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
+                                                    <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
                                             
                                                 
@@ -660,17 +660,66 @@ $incharge="";
                         </div>
                     </div>
                 </div>
-                <!-----------------------Modal------------------>
-                <div class="modal fade" id="popUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <!-----------------------Delete Modal------------------>
+                  <div class="modal fade" id="myModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content py-4">
                             <div class="modal-body d-flex justify-content-center">
                                 Are you sure to delete this?
                             </div>
+
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btnModalYes px-5 py-2 me-2 bg-cl-red cl-white border-0 rounded-3"
-                                    data-bs-dismiss="modal">Yes</button>
-                                <button type="button" class="btnModalNo px-5 py-2 bg-cl-green cl-white border-0 rounded-3">No</button>
+                                <form method="POST" action="action.php" id="form-delete-user">
+                                    <input type="hidden" name="id">
+                                <button  type="submit" class="btnModalYes px-5 py-2 me-2 bg-cl-red cl-white border-0 rounded-3" name="deleteBtn"
+                                    >Yes</button>
+                                    </form>
+                                <button type="button" class="btnModalNo px-5 py-2 bg-cl-green cl-white border-0 rounded-3" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-----------------------Edit Modal------------------>
+                <div class="modal fade" id="editModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content py-4">
+                            <div class="modal-body d-flex justify-content-center">
+                                Edit the task
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <form method="POST" action="action.php" id="form-edit-user">
+                                    <div>
+                                    <div class="mb-2">
+                                    <input type="hidden" id="id" name="id">
+                                    <input type="text" id="task" name="task" placeholder="Task Name">
+                                    <select
+                                            aria-label=".form-select-lg example" name="incharge">
+                                            <option value="0" selected> Select Incharge</option>
+                                            <option value="Rifat Shampod">Rifat Shampod</option>
+                                            <option value="Samiul Islam Midon">Samiul Islam Midon</option>
+                                            <option value="Antu Shamitra">Antu Shamitra</option>
+                                            <option value="Privel Paul Titu">Privel Paul Titu</option>
+                                            <option value="Rafsan Hossain">Rafsan Hossain</option>
+                                            <option value="Tonmoy Mandal">Tonmoy Mandal</option>
+                                            <option value="Tonu Tahmid">Tonu Tahmid</option>
+                                            <option value="Sheikh Mehedi">Sheikh Mehedi</option>
+                                            <option value="Manowar Haider">Manowar Haider</option>
+                                            <option value="Arif Bipu">Arif Bipu</option>
+                                            <option value="Ahona Yesmin">Ahona Yesmin</option>
+                                            <option value="Iftekhar sakib">Iftekhar sakib</option>
+                                            <option value="Gulsaba Fiha">Gulsaba Fiha</option>
+                                            <option value="Shawon Islam">Shawon Islam</option>
+                                        </select>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                <button  type="submit" class="btnModalYes px-5 py-2 me-2 bg-cl-green cl-white border-0 rounded-3" name="editBtn"
+                                    >Edit</button>
+                                    </form>
+                                <button type="button" class="btnModalNo px-5 py-2  bg-cl-red cl-white border-0 rounded-3" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -681,10 +730,29 @@ $incharge="";
 
 
     <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
+
+function confirmDelete(self) {
+    var id = self.getAttribute("data-id");
+
+    document.getElementById("form-delete-user").id.value = id;
+    $("#myModal").modal("show");
+};
+
+
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+function confirmEdit(self){
+    var x1 = self.getAttribute("data-id");
+    var x2 = self.getAttribute("data-task");
+    document.getElementById("id").value = x1;
+    document.getElementById("task").value = x2;
+        $('#editModal').modal('show');
+};
+
+
+</script>
 
 </body>
 
