@@ -1,103 +1,90 @@
 <?php
 
-include_once("include/config.php");
+include_once "include/config.php";
 
-$state=0;
+$state = 0;
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    
-        if(isset($_POST['btn1'])){
-            stateChange($_POST['btn1'], 1);
-        }
-        elseif(isset($_POST['btn2'])){
-            stateChange($_POST['btn2'], 2);
-        }
-        elseif(isset($_POST['btn3'])){
-            stateChange($_POST['btn3'], 3);
-        }
-        elseif(isset($_POST['btn4'])){
-            stateChange($_POST['btn4'], 4);
-        }
+    if (isset($_POST['btn1'])) {
+        stateChange($_POST['btn1'], 1);
+    } elseif (isset($_POST['btn2'])) {
+        stateChange($_POST['btn2'], 2);
+    } elseif (isset($_POST['btn3'])) {
+        stateChange($_POST['btn3'], 3);
+    } elseif (isset($_POST['btn4'])) {
+        stateChange($_POST['btn4'], 4);
+    } elseif (isset($_POST['inputBl'])) {
+        $task = $_POST['task'];
+        $person = $_POST['person'];
+        $type = 1;
+        $status = 1;
 
-        elseif(isset($_POST['inputBl'])){
-            $task=$_POST['task'];
-            $person=$_POST['person'];
-            $type=1;
-            $status=1;
+        addTask($task, $person, $type, $status);
 
-            addTask($task, $person, $type, $status);
+    } elseif (isset($_POST['inputPending'])) {
+        $task = $_POST['task'];
+        $person = $_POST['person'];
+        $type = 2;
+        $status = 1;
 
-        }
+        addTask($task, $person, $type, $status);
 
-        elseif(isset($_POST['inputPending'])){
-            $task=$_POST['task'];
-            $person=$_POST['person'];
-            $type=2;
-            $status=1;
+    } elseif (isset($_POST['inputProgress'])) {
+        $task = $_POST['task'];
+        $person = $_POST['person'];
+        $type = 3;
+        $status = 1;
 
-            addTask($task, $person, $type, $status);
+        addTask($task, $person, $type, $status);
 
-        }
+    } elseif (isset($_POST['inputComplete'])) {
+        $task = $_POST['task'];
+        $person = $_POST['person'];
+        $type = 4;
+        $status = 1;
 
-        elseif(isset($_POST['inputProgress'])){
-            $task=$_POST['task'];
-            $person=$_POST['person'];
-            $type=3;
-            $status=1;
+        addTask($task, $person, $type, $status);
 
-            addTask($task, $person, $type, $status);
-
-        }
-
-        elseif(isset($_POST['inputComplete'])){
-            $task=$_POST['task'];
-            $person=$_POST['person'];
-            $type=4;
-            $status=1;
-
-            addTask($task, $person, $type, $status);
-
-        }
     }
+}
 
-    function addTask($task, $person, $type, $status) {   //-----------------------add task
-        include("include/config.php");
+function addTask($task, $person, $type, $status)
+{ //-----------------------add task
+    include "include/config.php";
 
-        $sqlAdd = "INSERT INTO livetech (task, person, position, status)
+    $sqlAdd = "INSERT INTO livetech (task, person, position, status)
         VALUES ('$task', '$person', '$type', '$status')";
 
-        if ($conn->query($sqlAdd) === TRUE) {
+    if ($conn->query($sqlAdd) === true) {
 
-        }
-        else {
+    } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    }
+}
+
+function findTotal($status)
+{ //--------------------------------find total number
+    include "include/config.php";
+
+    $sql = "SELECT * FROM livetech where position='$status' AND status='1'";
+
+    if ($result = mysqli_query($conn, $sql)) {
+        // Return the number of rows in result set
+        $rowcount = mysqli_num_rows($result);
+        return $rowcount;
     }
 
-    function findTotal($status){   //--------------------------------find total number
-        include("include/config.php");
+}
 
-        $sql="SELECT * FROM livetech where position='$status' AND status='1'";
+function stateChange($taskId, $position)
+{ //-----------------------change state
+    include "include/config.php";
 
-                        if ($result=mysqli_query($conn,$sql))
-                          {
-                          // Return the number of rows in result set
-                          $rowcount=mysqli_num_rows($result);
-                          return $rowcount;
-                        }
-        
-    }
+    $sqlUpdate = "UPDATE livetech SET position='$position' WHERE id=$taskId";
+    $result = mysqli_query($conn, $sqlUpdate);
 
-    function stateChange($taskId, $position){  //-----------------------change state
-        include("include/config.php");
-
-        $sqlUpdate= "UPDATE livetech SET position='$position' WHERE id=$taskId";
-        $result=mysqli_query($conn,$sqlUpdate);
-                          
-    }
-
+}
 
 ?>
 
@@ -197,10 +184,10 @@ $state=0;
             </div>
             <div class="row">
                 <div class="col-lg-3 backlog">
-                    <h6 class="mb-3">Backlog <span class="bg-cl-light-blue cl-blue px-2 py-1 ms-2"><?php echo findTotal(1);?></span></h6>  
+                    <h6 class="mb-3">Backlog <span class="bg-cl-light-blue cl-blue px-2 py-1 ms-2"><?php echo findTotal(1); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
-                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <div class="divHeader d-flex px-1">
                                     <div class="d-flex mb-2">
                                         <div class="divHeaderInput">
@@ -246,20 +233,20 @@ $state=0;
                         </div>
                         <hr class="cl-blue">
                         <div class="divBody">
-                            <?php 
-                                        $sql = "SELECT * FROM livetech where position='1' AND status='1' ORDER BY id desc";
-                                        $result = $conn->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $result->fetch_assoc()) {   
-                                                
-                                        ?>
+                            <?php
+$sql = "SELECT * FROM livetech where position='1' AND status='1' ORDER BY id desc";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+
+        ?>
                             <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
-                            
+
                                 <div class="bg-cl-grey divborder1 px-3 py-2 rounded-3 w-100">
                                     <div class="mb-2 d-flex">
                                         <i class="fas fa-circle cl-blue me-1 mt-1 xsmall"></i>
-                                        
+
                                         <h6 class="cl-mat fw-bold"><?php echo $row['task'] ?></h6>
                                     </div>
                                     <div class="divBodyBottom d-flex justify-content-between">
@@ -267,9 +254,9 @@ $state=0;
                                             <i class="fas fa-user-alt xsmall cl-grey me-1"></i><small
                                                 class="cl-blue fw-light"><?php echo $row['person'] ?></small>
                                         </div>
-                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                             <div class="d-flex mb-1">
-                                            
+
                                                 <div class="divContentTooltip cursor bg-white d-flex justify-content-center align-items-center mx-1"
                                                     data-toggle="tooltip" data-placement="bottom" title="BackLog" onclick="location.href">
                                                     <button class="border-0 bg-white" type="submit" name="btn1" value="<?php echo $row['id'] ?>"><img src="assets/image/icon1.png" alt=""></button>
@@ -294,20 +281,20 @@ $state=0;
                                                     class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
                                                     <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
-                                            
-                                                
-                                            </div> 
+
+
+                                            </div>
                                         </form>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
                             <?php
-                                            }
-                                        }
-                                    ?>
-                            
+}
+}
+?>
+
                         </div>
                     </div>
                 </div>
@@ -315,7 +302,7 @@ $state=0;
                     <h6 class="mb-3">Pending <span class="bg-cl-light-red cl-blue px-2 py-1 ms-2"><?php echo findTotal(2); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <div class="divHeader d-flex px-1">
                                     <div class="d-flex mb-2">
                                         <div class="divHeaderInput">
@@ -361,29 +348,29 @@ $state=0;
                         </div>
                         <hr class="cl-blue">
                         <div class="divBody">
-                        <?php 
-                                        $sql = "SELECT * FROM livetech where position='2' AND status='1' ORDER BY id desc";
-                                        $result = $conn->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $result->fetch_assoc()) {   
-                                                
-                                        ?>
+                        <?php
+$sql = "SELECT * FROM livetech where position='2' AND status='1' ORDER BY id desc";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+
+        ?>
                             <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
                                 <div class="bg-cl-grey divborder2 px-3 py-2 rounded-3 w-100" >
                                     <div class="mb-2 d-flex">
                                         <i class="fas fa-circle cl-blue me-1 mt-1 xsmall"></i>
                                         <h6 class="cl-mat fw-bold"><?php echo $row['task'] ?>
-                                            </h6> 
+                                            </h6>
                                     </div>
                                     <div class="divBodyBottom d-flex justify-content-between">
                                         <div class="d-flex align-items-center mb-1">
                                             <i class="fas fa-user-alt xsmall cl-grey me-1"></i><small
                                                 class="cl-blue fw-light"><?php echo $row['person'] ?></small>
                                         </div>
-                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                             <div class="d-flex mb-1">
-                                                
+
                                                 <div class="divContentTooltip cursor bg-white d-flex justify-content-center align-items-center mx-1"
                                                         data-toggle="tooltip" data-placement="bottom" title="BackLog" onclick="location.href">
                                                         <button class="border-0 bg-white" type="submit" name="btn1" value="<?php echo $row['id'] ?>"><img src="assets/image/icon1.png" alt=""></button>
@@ -413,11 +400,11 @@ $state=0;
                                         </form>
                                 </div>
                             </div>
-                            
+
                             <?php
-                                                }
-                                            }
-                            ?>
+}
+}
+?>
                         </div>
                     </div>
                 </div>
@@ -426,7 +413,7 @@ $state=0;
                     <h6 class="mb-3">In Progress <span class="bg-cl-light-yellow cl-blue px-2 py-1 ms-2"><?php echo findTotal(3); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <div class="divHeader d-flex px-1">
                                     <div class="d-flex mb-2">
                                         <div class="divHeaderInput">
@@ -472,14 +459,14 @@ $state=0;
                         </div>
                         <hr class="cl-blue">
                         <div class="divBody">
-                        <?php 
-                                        $sql = "SELECT * FROM livetech where position='3' AND status='1' ORDER BY id desc";
-                                        $result = $conn->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $result->fetch_assoc()) {   
-                                                
-                                        ?>
+                        <?php
+$sql = "SELECT * FROM livetech where position='3' AND status='1' ORDER BY id desc";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+
+        ?>
                             <!-------------------------  card in progress --------------------------->
                             <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
                                 <div class="bg-cl-grey divborder3 px-3 py-2 rounded-3 w-100">
@@ -492,9 +479,9 @@ $state=0;
                                             <i class="fas fa-user-alt xsmall cl-grey me-1"></i><small
                                                 class="cl-blue fw-light"><?php echo $row['person'] ?></small>
                                         </div>
-                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                             <div class="d-flex mb-1">
-                                            
+
                                                 <div class="divContentTooltip cursor bg-white d-flex justify-content-center align-items-center mx-1"
                                                     data-toggle="tooltip" data-placement="bottom" title="BackLog" onclick="location.href">
                                                     <button class="border-0 bg-white" type="submit" name="btn1" value="<?php echo $row['id'] ?>"><img src="assets/image/icon1.png" alt=""></button>
@@ -519,9 +506,9 @@ $state=0;
                                                     class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
                                                     <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
-                                            
-                                                
-                                            </div> 
+
+
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -529,9 +516,9 @@ $state=0;
                             <!-------------------------  card in progress --------------------------->
 
                             <?php
-                                    }
-                                }
-                            ?>
+}
+}
+?>
                         </div>
                     </div>
                 </div>
@@ -541,7 +528,7 @@ $state=0;
                     <h6 class="mb-3">completed <span class="bg-cl-light-green cl-blue px-2 py-1 ms-2"><?php echo findTotal(4); ?></span></h6>
                     <div class="divborder py-4 bg-white">
                         <div class="d-flex justify-content-center">
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <div class="divHeader d-flex px-1">
                                     <div class="d-flex mb-2">
                                         <div class="divHeaderInput">
@@ -559,7 +546,7 @@ $state=0;
                                                         id="browser" placeholder="type name here">
                                                     <datalist id="browsers">
                                                         <input class="bg-cl-grey w-100" type="text">
-                                                        
+
                                                         <option value="Rifat Shampod">
                                                         <option value="Antu Shamitra">
                                                         <option value="Privel Paul Titu">
@@ -588,29 +575,29 @@ $state=0;
                         </div>
                         <hr class="cl-blue">
                         <div class="divBody">
-                        <?php 
-                                        $sql = "SELECT * FROM livetech where position='4' AND status='1' ORDER BY id desc";
-                                        $result = $conn->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $result->fetch_assoc()) {   
-                                                
-                                        ?>
-                        
+                        <?php
+$sql = "SELECT * FROM livetech where position='4' AND status='1' ORDER BY id desc";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+
+        ?>
+
                             <div class="d-flex justify-content-center align-items-center mb-2 px-2 ">
                                 <div class="bg-cl-grey divborder4 px-3 py-2 rounded-3 w-100">
                                     <div class="mb-2 d-flex">
                                         <i class="fas fa-circle cl-blue me-1 mt-1 xsmall"></i>
-                                        <h6 class="cl-mat fw-bold"><?php echo $row['task'] ?></h6>
+                                        <h6 class="cl-mat fw-bold" id="taskname"><?php echo $row['task'] ?></h6>
                                     </div>
                                     <div class="divBodyBottom d-flex justify-content-between">
                                         <div class="d-flex align-items-center mb-1">
                                             <i class="fas fa-user-alt xsmall cl-grey me-1"></i><small
                                                 class="cl-blue fw-light"><?php echo $row['person'] ?></small>
                                         </div>
-                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                             <div class="d-flex mb-1">
-                                            
+
                                                 <div class="divContentTooltip cursor bg-white d-flex justify-content-center align-items-center mx-1"
                                                     data-toggle="tooltip" data-placement="bottom" title="BackLog" onclick="location.href">
                                                     <button class="border-0 bg-white" type="submit" name="btn1" value="<?php echo $row['id'] ?>"><img src="assets/image/icon1.png" alt=""></button>
@@ -628,24 +615,24 @@ $state=0;
                                                     <button class="border-0 bg-white" type="submit" name="btn4" value="<?php echo $row['id'] ?>"><img src="assets/image/icon4.png" alt=""></button>
                                                 </div>
                                                 <div
-                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
-                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" value="edit"><i class="fas fa-pencil-alt xsmall"></i></button>
+                                                    class="divContentTooltip cursor bg-cl-green cl-white d-flex justify-content-center align-items-center rounded-3 mx-1" id="editicon">
+                                                    <button class="border-0 bg-cl-green cl-white editbtn" type="button" name="btn" data-id="<?php echo $row['id']; ?>" data-task="<?php echo $row['task']; ?>" onclick="confirmEdit(this);"><i class="fas fa-pencil-alt xsmall"></i></button>
                                                 </div>
                                                 <div
                                                     class="divContentTooltip cursor bg-cl-red cl-white d-flex justify-content-center align-items-center rounded-3 mx-1">
                                                     <button class="border-0 bg-cl-red cl-white" type="button" class="btn btn-danger" data-id="<?php echo $row['id']; ?>" onclick="confirmDelete(this);"> <i class="fas fa-trash-alt xsmall"></i> </button>
                                                 </div>
-                                            
-                                                
-                                            </div> 
+
+
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                             <?php
-                                        }
-                                    }
-                            ?>
+}
+}
+?>
                         </div>
                     </div>
                 </div>
@@ -656,7 +643,7 @@ $state=0;
                             <div class="modal-body d-flex justify-content-center">
                                 Are you sure to delete this?
                             </div>
-                            
+
                             <div class="d-flex justify-content-center">
                                 <form method="POST" action="action.php" id="form-delete-user">
                                     <input type="hidden" name="id">
@@ -667,21 +654,23 @@ $state=0;
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
                 <!-----------------------Edit Modal------------------>
                 <div class="modal fade" id="editModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content py-4">
                             <div class="modal-body d-flex justify-content-center">
-                                Edit the task 
+                                Edit the task
                             </div>
-                            
+
                             <div class="d-flex justify-content-center">
                                 <form method="POST" action="action.php" id="form-edit-user">
+                                    <div>
+                                    <div class="mb-2">
                                     <input type="hidden" id="id" name="id">
                                     <input type="text" id="task" name="task" placeholder="Task Name">
-                                    <select 
+                                    <select
                                             aria-label=".form-select-lg example" name="incharge">
                                             <option value="0" selected> All</option>
                                             <option value="Rifat Shampod">Rifat Shampod</option>
@@ -699,11 +688,14 @@ $state=0;
                                             <option value="Gulsaba Fiha">Gulsaba Fiha</option>
                                             <option value="Shawon Islam">Shawon Islam</option>
                                         </select>
-
-                                <button  type="submit" class="btnModalYes px-5 py-2 me-2 bg-cl-red cl-white border-0 rounded-3" name="editBtn"
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                <button  type="submit" class="btnModalYes px-5 py-2 me-2 bg-cl-green cl-white border-0 rounded-3" name="editBtn"
                                     >Edit</button>
                                     </form>
-                                <button type="button" class="btnModalNo px-5 py-2 bg-cl-green cl-white border-0 rounded-3" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btnModalNo px-5 py-2  bg-cl-red cl-white border-0 rounded-3" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -718,24 +710,25 @@ $state=0;
 
         function confirmDelete(self) {
             var id = self.getAttribute("data-id");
-        
+
             document.getElementById("form-delete-user").id.value = id;
             $("#myModal").modal("show");
-        }
+        };
 
 
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        $(document).ready(function () {
-            $('.editbtn').on('click', function(){
+        function confirmEdit(self){
+            var x1 = self.getAttribute("data-id");
+            var x2 = self.getAttribute("data-task");
+            document.getElementById("id").value = x1;
+            document.getElementById("task").value = x2;
                 $('#editModal').modal('show');
-            });
-        });
-    
-        
+        };
 
+        
     </script>
 
 </body>
